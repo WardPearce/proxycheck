@@ -1,18 +1,5 @@
-from typing import Any
-from httpx import AsyncClient, Client, Response
-
-from .awaiting.ip import AwaitingIP
-
-
-class Base:
-    API_URL = "https://proxycheck.io/v2/"
-
-    def _handle_request(self, resp: Response, ip: str) -> Any:
-        resp.raise_for_status()
-        resp_json = resp.json()
-
-        if resp_json["status"] == "ok":
-            return resp_json[ip]
+from .awaiting.ip import AwaitingIp
+from .base import Base
 
 
 class Awaiting(Base):
@@ -24,17 +11,10 @@ class Awaiting(Base):
         key : str, optional
         """
 
-        super().__init__()
-        self.requests = AsyncClient(params={"key": key} if key else None)
+        super().__init__(key, True)
 
-    async def _get(self, ip: str, **kwargs) -> dict:
-        return self._handle_request(
-            await self.requests.get(self.API_URL + ip, params=kwargs),
-            ip
-        )
-
-    def ip(self, ip: str) -> AwaitingIP:
-        pass
+    def ip(self, ip: str) -> AwaitingIp:
+        return AwaitingIp(ip, self)
 
     async def close(self) -> None:
         await self.requests.aclose()
@@ -49,14 +29,7 @@ class Blocking(Base):
         key : str, optional
         """
 
-        super().__init__()
-        self.requests = Client(params={"key": key} if key else None)
-
-    def _get(self, ip: str, **kwargs) -> dict:
-        return self._handle_request(
-            self.requests.get(self.API_URL + ip, params=kwargs),
-            ip
-        )
+        super().__init__(key, False)
 
     def close(self) -> None:
         self.requests.close()
