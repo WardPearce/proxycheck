@@ -5,16 +5,16 @@ from ..model import IpModel
 from ..util import format_params
 
 
-class AwaitingIp(IpBase):
-    async def _get(self, **kwargs) -> IpModel:
+class BlockingIp(IpBase):
+    def _get(self, **kwargs) -> IpModel:
         return self._handle_request(
-            await self._context.requests.get(
+            self._context.requests.get(
                 self.url,
                 params=format_params(kwargs)
             )
         )
 
-    async def proxy(self) -> bool:
+    def proxy(self) -> bool:
         """Used to check if Ip address is proxy.
 
         Returns
@@ -23,9 +23,9 @@ class AwaitingIp(IpBase):
             If proxy
         """
 
-        return (await self._get(vpn=True)).proxy
+        return (self._get(vpn=True)).proxy
 
-    async def geological(self) -> Tuple[str, str]:
+    def geological(self) -> Tuple[str, str]:
         """Used to get the longitude & latitude.
 
         Returns
@@ -36,10 +36,10 @@ class AwaitingIp(IpBase):
             longitude
         """
 
-        ip = await self._get(asn=True)
+        ip = self._get(asn=True)
         return ip.latitude, ip.longitude
 
-    async def risk(self) -> int:
+    def risk(self) -> int:
         """Used to get risk value.
 
         Returns
@@ -47,9 +47,9 @@ class AwaitingIp(IpBase):
         int
         """
 
-        return (await self._get(risk=True)).risk
+        return (self._get(risk=True)).risk
 
-    async def get(self, **kwargs) -> IpModel:
+    def get(self, **kwargs) -> IpModel:
         """Used to get details on a IP.
 
         Parameters
@@ -83,4 +83,4 @@ class AwaitingIp(IpBase):
             https://www.python-httpx.org/exceptions/#the-exception-hierarchy
         """
 
-        return await self._get(**kwargs)
+        return self._get(**kwargs)

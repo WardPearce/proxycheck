@@ -4,7 +4,7 @@ from .. import Awaiting
 from ..model import IpModel
 
 
-class TestProxyCheckAwaitng(asynctest.TestCase):
+class TestProxyCheckAwaiting(asynctest.TestCase):
     use_default_loop = True
 
     def setUp(self):
@@ -15,7 +15,7 @@ class TestProxyCheckAwaitng(asynctest.TestCase):
         await self.client.close()
 
     async def test_valid_get(self):
-        self.assertIsInstance(await self.valid_ip.get(), IpModel)
+        self.assertIsInstance(await self.valid_ip.get(asn=True), IpModel)
 
     async def test_valid_risk(self):
         self.assertTrue(type(await self.valid_ip.risk()) == int)
