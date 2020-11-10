@@ -3,6 +3,14 @@ from .blocking.ip import BlockingIp
 from .base import Base
 
 
+__version__ = "0.0.1"
+__url__ = "https://proxycheck.readthedocs.io/en/latest/"
+__description__ = "Wrapper for Proxycheck's API."
+__author__ = "WardPearce"
+__author_email__ = "wardpearce@protonmail.com"
+__license__ = "GPL-3.0 License"
+
+
 class Awaiting(Base):
     def __init__(self, key: str = None) -> None:
         """Interact with Proxycheck.
