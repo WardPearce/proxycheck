@@ -37,6 +37,9 @@ class Awaiting(Base):
         return AwaitingIp(ip, self)
 
     async def close(self) -> None:
+        """Closes underlying TCP sessions.
+        """
+
         await self.requests.aclose()
 
 
@@ -66,4 +69,7 @@ class Blocking(Base):
         return BlockingIp(ip, self)
 
     def close(self) -> None:
+        """Closes underlying TCP sessions.
+        """
+
         self.requests.close()
