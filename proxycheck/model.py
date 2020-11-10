@@ -1,4 +1,19 @@
 class IpModel:
+    """
+    Attributes
+    ----------
+    asn: str
+    provider: str
+    continent: str
+    country : str
+    latitude : float
+    longitude : float
+    isocode : str
+    proxy : bool
+    type : str
+    risk : int
+    """
+
     def __init__(self, data: dict) -> None:
         self.asn = data["asn"] if "asn" in data else None
         self.provider = data["provider"] if "provider" in data else None

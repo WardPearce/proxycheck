@@ -62,6 +62,7 @@ class Blocking(Base):
         -------
         BlockingIp
         """
+
         return BlockingIp(ip, self)
 
     def close(self) -> None:
