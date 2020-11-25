@@ -1,6 +1,12 @@
 Exceptions
 ==========
 
+Base exception
+-----------
+.. autoclass:: proxycheck.exceptions.ProxyCheckException()
+    :members:
+
+
 QueryFailed
 -----------
 .. autoclass:: proxycheck.exceptions.QueryFailed()
