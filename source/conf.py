@@ -68,9 +68,16 @@ html_static_path = ['_static']
 
 master_doc = 'index'
 
+html_show_sourcelink = True
 html_sidebars = {
-    "**": ["globaltoc.html"]
+    "**": [
+        "logo-text.html",
+        "globaltoc.html",
+        "localtoc.html",
+        "searchbox.html"
+    ]
 }
+
 
 html_theme_options = {
 
