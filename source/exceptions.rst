@@ -2,7 +2,7 @@ Exceptions
 ==========
 
 Base exception
------------
+--------------
 .. autoclass:: proxycheck.exceptions.ProxyCheckException()
     :members:
 
