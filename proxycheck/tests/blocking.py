@@ -1,5 +1,7 @@
 import unittest
 
+from datetime import datetime
+
 from .. import Blocking
 from ..model import IpModel
 
@@ -28,3 +30,8 @@ class TestProxyCheckBlocking(unittest.TestCase):
 
     def test_valid_proxy(self):
         self.assertTrue(type(self.valid_ip.proxy()) == bool)
+
+    def test_date_field(self):
+        self.assertIsInstance(
+            self.valid_ip.get(ver=datetime.now()), IpModel
+        )

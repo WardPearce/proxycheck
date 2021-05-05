@@ -60,6 +60,10 @@ class BlockingIp(IpBase):
             by default False
         node : bool, optional
             by default False
+        time : bool, optional
+            by default False
+        inf : bool, optional
+            by default False
         risk : bool, optional
             by default False
         port : bool, optional
@@ -69,6 +73,8 @@ class BlockingIp(IpBase):
         days : int, optional
             by default None
         tag : str, optional
+            by default None
+        ver : datetime, optional
             by default None
 
         Returns

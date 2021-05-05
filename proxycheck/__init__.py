@@ -3,7 +3,7 @@ from .blocking.ip import BlockingIp
 from .base import Base
 
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 __url__ = "https://proxycheck.readthedocs.io/en/latest/"
 __description__ = "Wrapper for Proxycheck's API."
 __author__ = "WardPearce"
