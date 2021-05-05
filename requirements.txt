@@ -1,4 +1,4 @@
 httpx>=0.16.1
 asynctest
 sphinxcontrib-trio
-git+https://github.com/bashtage/sphinx-material.git
+sphinx-material
