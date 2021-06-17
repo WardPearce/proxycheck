@@ -1,4 +1,5 @@
 import logging
+from typing import Union
 
 from httpx import AsyncClient, Client, Response
 
@@ -9,13 +10,13 @@ from .exceptions import QueryFailed, QueryDenied
 class Base:
     API_URL = "https://proxycheck.io/v2/"
 
-    def __init__(self, key: str, awaiting: bool) -> None:
+    def __init__(self, key: Union[str, None], awaiting: bool) -> None:
         client = AsyncClient if awaiting else Client
         self.requests = client(params={"key": key} if key else None)
 
 
 class IpBase:
-    def __init__(self, ip: str, context: object) -> None:
+    def __init__(self, ip: str, context: Base) -> None:
         self.ip = ip
         self.url = context.API_URL + ip
         self._context = context

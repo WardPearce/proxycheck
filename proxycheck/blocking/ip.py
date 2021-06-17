@@ -1,11 +1,16 @@
-from typing import Tuple
+from typing import Tuple, TYPE_CHECKING, Union
 
 from ..base import IpBase
 from ..model import IpModel
 from ..util import format_params
 
+if TYPE_CHECKING:
+    from .. import Blocking
+
 
 class BlockingIp(IpBase):
+    _context: "Blocking"
+
     def _get(self, **kwargs) -> IpModel:
         return self._handle_request(
             self._context.requests.get(
@@ -14,7 +19,7 @@ class BlockingIp(IpBase):
             )
         )
 
-    def proxy(self) -> bool:
+    def proxy(self) -> Union[bool, None]:
         """Used to check if Ip address is proxy.
 
         Returns
@@ -25,7 +30,7 @@ class BlockingIp(IpBase):
 
         return (self._get(vpn=True)).proxy
 
-    def geological(self) -> Tuple[str, str]:
+    def geological(self) -> Tuple[Union[float, None], Union[float, None]]:
         """Used to get the longitude & latitude.
 
         Returns
@@ -39,7 +44,7 @@ class BlockingIp(IpBase):
         ip = self._get(asn=True)
         return ip.latitude, ip.longitude
 
-    def risk(self) -> int:
+    def risk(self) -> Union[int, None]:
         """Used to get risk value.
 
         Returns

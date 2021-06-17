@@ -1,9 +1,11 @@
+from httpx import AsyncClient, Client
+
 from .awaiting.ip import AwaitingIp
 from .blocking.ip import BlockingIp
 from .base import Base
 
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 __url__ = "https://proxycheck.readthedocs.io/en/latest/"
 __description__ = "Wrapper for Proxycheck's API."
 __author__ = "WardPearce"
@@ -12,6 +14,8 @@ __license__ = "GPL-3.0 License"
 
 
 class Awaiting(Base):
+    requests: AsyncClient
+
     def __init__(self, key: str = None) -> None:
         """Interact with Proxycheck.
 
@@ -44,6 +48,8 @@ class Awaiting(Base):
 
 
 class Blocking(Base):
+    requests: Client
+
     def __init__(self, key: str = None) -> None:
         """Interact with Proxycheck.
 
