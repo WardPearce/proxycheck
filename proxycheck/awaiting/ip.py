@@ -1,11 +1,16 @@
-from typing import Tuple
+from typing import Tuple, Union, TYPE_CHECKING
 
 from ..base import IpBase
 from ..model import IpModel
 from ..util import format_params
 
+if TYPE_CHECKING:
+    from .. import Awaiting
+
 
 class AwaitingIp(IpBase):
+    _context: "Awaiting"
+
     async def _get(self, **kwargs) -> IpModel:
         return self._handle_request(
             await self._context.requests.get(
@@ -14,7 +19,7 @@ class AwaitingIp(IpBase):
             )
         )
 
-    async def proxy(self) -> bool:
+    async def proxy(self) -> Union[bool, None]:
         """Used to check if Ip address is proxy.
 
         Returns
@@ -25,7 +30,8 @@ class AwaitingIp(IpBase):
 
         return (await self._get(vpn=True)).proxy
 
-    async def geological(self) -> Tuple[str, str]:
+    async def geological(self
+                         ) -> Tuple[Union[float, None], Union[float, None]]:
         """Used to get the longitude & latitude.
 
         Returns
@@ -39,7 +45,7 @@ class AwaitingIp(IpBase):
         ip = await self._get(asn=True)
         return ip.latitude, ip.longitude
 
-    async def risk(self) -> int:
+    async def risk(self) -> Union[int, None]:
         """Used to get risk value.
 
         Returns
