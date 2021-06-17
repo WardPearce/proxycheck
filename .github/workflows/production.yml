@@ -34,10 +34,7 @@ jobs:
       - name: Run pyright
         run: pyright proxycheck/*
       - name: Run unit tests
-        env:
-          KEY_ID: ${{ secrets.KEY_ID }}
-          KEY: ${{ secrets.KEY }}
-        run: python run_tests.py --key_id $KEY_ID --key $KEY
+        run: python run_tests.py
       - name: Pack to pypi
         env:
           PYPI_USER: ${{ secrets.PYPI_USER }}
