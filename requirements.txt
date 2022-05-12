@@ -1,4 +1,0 @@
-httpx>=0.16.1
-asynctest
-sphinxcontrib-trio
-sphinx-material
